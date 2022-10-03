@@ -9,7 +9,7 @@ conda env create -f pt.yaml
 * Prepare [ImageNet validation set (2012)](http://www.image-net.org), place in folder 'data/ILSVRC2012_img_val'
 
 
-# Reproduction of Table 2 (Numerical results of AAA)
+# Numerical results of AAA (Table 2)
 * CIFAR-10 (WideResNet28)
 ```
 python square.py
@@ -52,7 +52,7 @@ python square.py --dataset=imagenet --model=resnext101_32x8d --defense=inRND --e
 python square.py --dataset=imagenet --model=resnext101_32x8d --defense=AAALinear --eps=4
 ```
 
-# Reproduction of Table 3 (Generalization of AAA)
+# Generalization of AAA (Table 3)
 * vanilla training
 ```
 python square.py --targeted --defense=AAALinear
@@ -68,7 +68,7 @@ python square.py --targeted --defense=AAALinear --model=Dai2021Parameterizing
 python square.py --l2 --eps=0.5 --model=Dai2021Parameterizing
 ```
 
-# Reproduction of Table 4 (Adaptive attacks of AAA)
+# Adaptive attacks of AAA (Table 4)
 * bi-Square
 ```
 python square.py --loss=bi --defense=AAALinear
@@ -84,7 +84,7 @@ python square.py --loss=up --defense=AAALinear
 python square.py --loss=up --defense=AAASine
 ```
 
-# Reproduction of Others
+# Others
 * QueryNet attack
 ```
 python square.py --num_s=3 --gpu=0,1,2,3 --defense=AAALinear
