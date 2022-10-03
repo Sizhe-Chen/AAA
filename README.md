@@ -52,7 +52,7 @@ python square.py --dataset=imagenet --model=resnext101_32x8d --defense=inRND --e
 python square.py --dataset=imagenet --model=resnext101_32x8d --defense=AAALinear --eps=4
 ```
 
-# Generalization of AAA (Table 3)
+# Generalization of AAA (Table 4)
 * vanilla training
 ```
 python square.py --targeted --defense=AAALinear
@@ -68,7 +68,7 @@ python square.py --targeted --defense=AAALinear --model=Dai2021Parameterizing
 python square.py --l2 --eps=0.5 --model=Dai2021Parameterizing
 ```
 
-# Adaptive attacks of AAA (Table 4)
+# Adaptive attacks of AAA (Table 6)
 * bi-Square
 ```
 python square.py --loss=bi --defense=AAALinear
@@ -85,11 +85,11 @@ python square.py --loss=up --defense=AAASine
 ```
 
 # Others
-* QueryNet attack
+* QueryNet attack (Table 3)
 ```
 python square.py --num_s=3 --gpu=0,1,2,3 --defense=AAALinear
 ```
-* Attack by CE-loss
+* Attack by CE-loss (Table 8)
 ```
 python square.py --loss=ce --defense=AAALinear
 ```
