@@ -6,63 +6,139 @@
 ```
 conda env create -f pt.yaml
 ```
+* Prepare [ImageNet validation set (2012)](http://www.image-net.org), place in folder 'data/ILSVRC2012_img_val'
 
 
-# Reproduction
-* train the protecting DNN
-
+# Reproduction of Table 2 (Numerical results of AAA)
+* CIFAR-10 (WideResNet28)
 ```
-python vanilla.py
-```
-```
-python vanilla100.py
+python square.py
 ```
 ```
-python vanillaimg.py
+python square.py --model=Dai2021Parameterizing
 ```
-
-* crafting protective samples (CIFAR-10, SEP)
-
 ```
-python ens.py --num_model=30 --eps=2 --target_batch=0
+python square.py --defense=inRND
+```
+```
+python square.py --defense=AAALinear
 ```
 
-* crafting protective samples (CIFAR-10, SEP-FA)
-
+* ImageNet (WideResNet50)
 ```
-python ens_feature.py --num_model=30 --eps=2 --target_batch=0
+python square.py --dataset=imagenet --model=wide_resnet50_2 --eps=4
 ```
-
-* crafting protective samples (CIFAR-10, SEP-FA-VR)
-
 ```
-python ens_feature_svre.py --num_model=15 --eps=2 --target_batch=0
+python square.py --dataset=imagenet --model=Salman2020Do_50_2 --eps=4
 ```
-
-* crafting protective samples (CIFAR-100, SEP-FA-VR)
-
 ```
-python ens_feature_svre100.py --num_model=15 --eps=2 --target_batch=0
+python square.py --dataset=imagenet --model=wide_resnet50_2 --defense=inRND --eps=4
+```
+```
+python square.py --dataset=imagenet --model=wide_resnet50_2 --defense=AAALinear --eps=4
 ```
 
-* crafting protective samples (ImageNet subset, SEP-FA-VR)
+* ImageNet (ResNeXt101)
+```
+python square.py --dataset=imagenet --model=resnext101_32x8d --eps=4
+```
+```
+python square.py --dataset=imagenet --model=ResNeXt101_DenoiseAll --eps=4
+```
+```
+python square.py --dataset=imagenet --model=resnext101_32x8d --defense=inRND --eps=4
+```
+```
+python square.py --dataset=imagenet --model=resnext101_32x8d --defense=AAALinear --eps=4
+```
 
+# Reproduction of Table 3 (Generalization of AAA)
+* vanilla training
 ```
-python ens_feature_svreimg.py --num_model=15 --eps=2 --target_batch=0
+python square.py --targeted --defense=AAALinear
+```
+```
+python square.py --l2 --eps=0.5
+```
+* adversarial training
+```
+python square.py --targeted --defense=AAALinear --model=Dai2021Parameterizing
+```
+```
+python square.py --l2 --eps=0.5 --model=Dai2021Parameterizing
 ```
 
-* train the appropriator DNN
+# Reproduction of Table 4 (Adaptive attacks of AAA)
+* bi-Square
 ```
-python vanilla.py --uledir=samples/XX --eps=2
-```
-```
-python vanilla100.py --uledir=samples/XX --eps=2
+python square.py --loss=bi --defense=AAALinear
 ```
 ```
-python vanillaimg.py --uledir=samples/XX --eps=2
+python square.py --loss=bi --defense=AAASine
+```
+* up-Square
+```
+python square.py --loss=up --defense=AAALinear
+```
+```
+python square.py --loss=up --defense=AAASine
+```
+
+# Reproduction of Others
+* QueryNet attack
+```
+python square.py --num_s=3 --gpu=0,1,2,3 --defense=AAALinear
+```
+* Attack by CE-loss
+```
+python square.py --loss=ce --defense=AAALinear
 ```
 
 # Files
 ```
-├── ens_feature.py
+├── attacker.py
+├── data
+│   └── val.txt # for ImageNet attacks
+├── dent.py
+├── dfdmodels # for ResNeXt101_DenoiseAll
+│   ├── adv_model.py
+│   ├── inception_resnet_v2.py
+│   ├── __init__.py
+│   ├── nets.py
+│   ├── resnet_model.py
+│   └── third_party
+│       ├── imagenet_utils.py
+│       ├── __init__.py
+│       ├── __pycache__
+│       │   ├── imagenet_utils.cpython-36.pyc
+│       │   ├── imagenet_utils.cpython-37.pyc
+│       │   ├── __init__.cpython-36.pyc
+│       │   └── __init__.cpython-37.pyc
+│       ├── README.md
+│       ├── serve-data.py
+│       └── utils.py
+├── PCDARTS # for querynet attack
+│   ├── architect.py
+│   ├── genotypes.py
+│   ├── __init__.py
+│   ├── model.py
+│   ├── model_search_imagenet.py
+│   ├── model_search.py
+│   ├── model_search_random.py
+│   ├── operations.py
+│   ├── README.md
+│   ├── test.py
+│   ├── train_imagenet.py
+│   ├── train.py
+│   ├── train_search_imagenet.py
+│   ├── train_search.py
+│   ├── utils.py
+│   ├── V100_python1.0
+│   │   ├── train.py
+│   │   └── train_search.py
+│   └── visualize.py
+├── pt.yaml
+├── square.py
+├── utils.py
+└── victim.py
 ```
