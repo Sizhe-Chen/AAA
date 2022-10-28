@@ -1,5 +1,5 @@
 # Decription
-* The code is the official implementation of NeurIPS paper [Adversarial Attack on Attackers: Post-Process to Mitigate Black-Box Score-Based Query Attacks](https://arxiv.org/abs/2205.12134) [[Video](https://youtu.be/avrkUTjo7DA)]
+* The code is the official implementation of NeurIPS paper [Adversarial Attack on Attackers: Post-Process to Mitigate Black-Box Score-Based Query Attacks](https://neurips.cc/virtual/2022/poster/54907)
 * This repository supports data protection on CIFAR-10 and ImageNet
 * The experiments are run in an NVIDIA A100 GPU, but could modify the batch size to run on small GPUs
 * Install dependencies
